@@ -10,8 +10,8 @@ public class RecursiveQueensSolverTest {
     @Test
     void solve() {
         // Arrange
-        var boardSize = 3;
-        var queensNum = 2;
+        var boardSize = 4;
+        var queensNum = 3;
         ConstrainsCalculator constrainsCalculator = new NoThreeQueensInLineConstraintsCalculator(new CartesianCoordinatesConverter());
         QueensSolver solver = new RecursiveQueensSolver(constrainsCalculator);
 

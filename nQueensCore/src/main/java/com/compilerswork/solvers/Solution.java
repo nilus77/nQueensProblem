@@ -2,6 +2,8 @@ package com.compilerswork.solvers;
 
 import com.compilerswork.board.Chessboard;
 
+import java.util.Objects;
+
 public class Solution {
     private final Chessboard board;
 
@@ -20,6 +22,12 @@ public class Solution {
         Solution solution = (Solution) o;
         var queensPosition1 = board.getQueensPositions();
         var queensPosition2 = solution.board.getQueensPositions();
-        return queensPosition1.containsAll(queensPosition2);
+        return queensPosition1.equals(queensPosition2);
+    }
+
+    @Override
+    public int hashCode() {
+        var queens = board.getQueensPositions();
+        return queens.stream().map(Object::hashCode).reduce(0, (i, a) -> i + a);
     }
 }
