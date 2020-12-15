@@ -5,20 +5,22 @@ import com.compilerswork.board.Chessboard;
 public class ConsolePrinter implements Printer {
     @Override
     public void print(Chessboard board) {
+        var sb = new StringBuilder();
         var size = board.getSize();
         int i = 0;
         for (var square : board) {
             if (i == size) {
-                System.out.println();
+                sb.append("\n");
                 i = 0;
             }
             switch (square.getState()) {
-                case FREE -> System.out.print("_");
-                case OCCUPIED -> System.out.print("*");
-                case INVALID -> System.out.print("X");
+                case FREE -> sb.append("_");
+                case OCCUPIED -> sb.append("*");
+                case INVALID -> sb.append("X");
             }
-            System.out.print(" ");
+            sb.append(" ");
             i++;
         }
+        System.out.print(sb.toString());
     }
 }

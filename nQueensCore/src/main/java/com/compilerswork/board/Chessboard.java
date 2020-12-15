@@ -1,14 +1,49 @@
 package com.compilerswork.board;
 
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
-public class Chessboard implements Cloneable, Iterable<Square> {
+public class Chessboard implements Iterable<Square> {
     private final int size;
     private Square[][] board;
 
     public Chessboard(int size) {
         this.size = size;
         init();
+    }
+
+    public Chessboard(Chessboard board) {
+        this(board.getSize());
+        var it1 = iterator();
+        var it2 = board.iterator();
+        while (it1.hasNext()) {
+            it1.next().setState(it2.next().getState());
+        }
+    }
+
+    public void setSquareState(Position p, SquareState state) {
+        assert ChessboardUtils.isPositionInsideBoard(p, size);
+        board[p.getRow()][p.getColumn()].setState(state);
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    @Override
+    public Iterator<Square> iterator() {
+        return new ChessboardIterator(size, board);
+    }
+
+    public List<Position> getQueensPositions() {
+        var positions = new LinkedList<Position>();
+        for (var square : this) {
+            if (square.isOccupied()) {
+                positions.add(square.getPosition());
+            }
+        }
+        return positions;
     }
 
     private void init() {
@@ -19,25 +54,5 @@ public class Chessboard implements Cloneable, Iterable<Square> {
                 board[i][j] = new Square(i, j);
             }
         }
-    }
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        var clone = new Chessboard(size);
-        var it = iterator();
-        var cloneIt = clone.iterator();
-        while (it.hasNext()) {
-            cloneIt.next().setState(it.next().getState());
-        }
-        return clone;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    @Override
-    public Iterator<Square> iterator() {
-        return new ChessboardIterator(size, board);
     }
 }

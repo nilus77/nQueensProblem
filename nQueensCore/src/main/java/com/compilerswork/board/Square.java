@@ -1,5 +1,6 @@
 package com.compilerswork.board;
 
+
 public class Square {
     private SquareState state;
     private final Position position;
@@ -8,7 +9,7 @@ public class Square {
         this(SquareState.FREE, new Position(row, column));
     }
 
-    public Square(SquareState state, Position position) {
+    public Square(final SquareState state, final Position position) {
         this.state = state;
         this.position = position;
     }
@@ -19,6 +20,18 @@ public class Square {
 
     public void setState(SquareState state) {
         this.state = state;
+    }
+
+    public boolean isFree() {
+        return state == SquareState.FREE;
+    }
+
+    public boolean isInvalid() {
+        return state == SquareState.INVALID;
+    }
+
+    public boolean isOccupied() {
+        return state == SquareState.OCCUPIED;
     }
 
     public Position getPosition() {
