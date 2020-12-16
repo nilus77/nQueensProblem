@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class QueensInLineConstraint extends AbstractConstraint {
     private final Position queen1Position;
     private final Position queen2Position;
-    private Line lineBetweenQueens;
+    private final Line lineBetweenQueens;
 
     public QueensInLineConstraint(CoordinatesConverter coordinatesConverter, Position queen1Position, Position queen2Position, int boardSize) {
         super(coordinatesConverter, boardSize);

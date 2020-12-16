@@ -47,39 +47,21 @@ public class QueenMovementsConstraint extends AbstractConstraint {
         var queenColumn = queenPosition.getColumn();
 
         // Vertical movements
-        var nearRow = queenRow + 1;
-        if (nearRow >= boardSize) {
-            nearRow = queenRow - 1;
-        }
         movementLines.add(new Line(coordinatesConverter.fromChessboardPosition(queenRow, queenColumn),
-                                    coordinatesConverter.fromChessboardPosition(nearRow, queenColumn)));
+                                    coordinatesConverter.fromChessboardPosition(queenRow + 1, queenColumn)));
 
         // Horizontal movements
-        var nearColumn = queenColumn + 1;
-        if (nearColumn >= boardSize) {
-            nearColumn = queenColumn - 1;
-        }
         movementLines.add(new Line(coordinatesConverter.fromChessboardPosition(queenRow, queenColumn),
-                                    coordinatesConverter.fromChessboardPosition(queenRow, nearColumn)));
+                                    coordinatesConverter.fromChessboardPosition(queenRow, queenColumn + 1)));
 
         // Main diagonal movements
         var mainDiagSecondPoint = new Position(queenRow - 1, queenColumn - 1);
-        if (!ChessboardUtils.isPositionInsideBoard(mainDiagSecondPoint, boardSize)) {
-            mainDiagSecondPoint = new Position(queenRow + 1, queenColumn + 1);
-        }
-        if (ChessboardUtils.isPositionInsideBoard(mainDiagSecondPoint, boardSize)) {
-            movementLines.add(new Line(coordinatesConverter.fromChessboardPosition(queenPosition),
-                                        coordinatesConverter.fromChessboardPosition(mainDiagSecondPoint)));
-        }
+        movementLines.add(new Line(coordinatesConverter.fromChessboardPosition(queenPosition),
+                                    coordinatesConverter.fromChessboardPosition(mainDiagSecondPoint)));
 
         // Secondary diagonal movements
         var secondaryDiagSecondPoint = new Position(queenRow - 1, queenColumn + 1);
-        if (!ChessboardUtils.isPositionInsideBoard(secondaryDiagSecondPoint, boardSize)) {
-            secondaryDiagSecondPoint = new Position(queenRow + 1, queenColumn - 1);
-        }
-        if (ChessboardUtils.isPositionInsideBoard(secondaryDiagSecondPoint, boardSize)) {
-            movementLines.add(new Line(coordinatesConverter.fromChessboardPosition(queenPosition),
-                                        coordinatesConverter.fromChessboardPosition(secondaryDiagSecondPoint)));
-        }
+        movementLines.add(new Line(coordinatesConverter.fromChessboardPosition(queenPosition),
+                                    coordinatesConverter.fromChessboardPosition(secondaryDiagSecondPoint)));
     }
 }
