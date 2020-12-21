@@ -25,8 +25,9 @@ public class QueensInLineConstraint extends AbstractConstraint {
 
     @Override
     public List<Position> getInvalidPositions() {
-        return lineBetweenQueens
-                .getIntegralPoints(0, boardSize - 1)
+        return (lineBetweenQueens.isAVerticalLine()
+                    ? lineBetweenQueens.getIntegralPointsY(0, boardSize - 1)
+                    : lineBetweenQueens.getIntegralPoints(0, boardSize - 1))
                 .stream()
                 .distinct()
                 .map(coordinatesConverter::fromCartesianPoint)

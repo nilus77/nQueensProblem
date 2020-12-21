@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Chessboard implements Iterable<Square> {
     private final int size;
-    private Square[][] board;
+    protected Square[][] board;
 
     public Chessboard(int size) {
         this.size = size;
@@ -33,7 +33,11 @@ public class Chessboard implements Iterable<Square> {
 
     @Override
     public Iterator<Square> iterator() {
-        return new ChessboardIterator(size, board);
+        return new ChessboardIterator(board);
+    }
+
+    public Iterator<Square> iterator(Iterator<Square> it) {
+        return new ChessboardIterator(board, (ChessboardIterator)it);
     }
 
     public List<Position> getQueensPositions() {

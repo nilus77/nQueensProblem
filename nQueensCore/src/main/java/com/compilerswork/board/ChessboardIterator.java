@@ -9,10 +9,17 @@ public class ChessboardIterator implements Iterator<Square> {
     private int i;
     private int j;
 
-    public ChessboardIterator(final int size, final Square[][] board) {
-        this.size = size;
+    public ChessboardIterator(Square[][] board) {
+        this.size = board.length;
         this.board = board;
         i = j = 0;
+    }
+
+    public ChessboardIterator(Square[][] board, ChessboardIterator it) {
+        this.size = board.length;
+        this.board = board;
+        i = it.i;
+        j = it.j;
     }
 
     @Override

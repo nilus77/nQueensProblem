@@ -7,14 +7,15 @@ import com.compilerswork.printers.ConsolePrinter;
 import com.compilerswork.utils.math.coordinates.CartesianCoordinatesConverter;
 import org.junit.jupiter.api.Test;
 
-public class RecursiveQueensSolverTest {
+public class IterativeQueensSolverTest {
     @Test
     void solve() {
         // Arrange
-        var boardSize = 8;
-        var queensNum = 8;
-        ConstrainsCalculator constrainsCalculator = new ClassicConstraintsCalculator(new CartesianCoordinatesConverter());
-        QueensSolver solver = new RecursiveQueensSolver(constrainsCalculator);
+        var boardSize = 10;
+        var queensNum = 10;
+        var constrainsCalculator = new NoThreeQueensInLineConstraintsCalculator(new CartesianCoordinatesConverter());
+//        var constrainsCalculator = new ClassicConstraintsCalculator(new CartesianCoordinatesConverter());
+        QueensSolver solver = new IterativeQueensSolver(constrainsCalculator);
 
         // Act
         var solutions = solver.solve(boardSize, queensNum);

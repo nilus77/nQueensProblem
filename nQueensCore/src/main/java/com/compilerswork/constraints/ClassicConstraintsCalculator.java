@@ -6,7 +6,7 @@ import com.compilerswork.utils.math.coordinates.CoordinatesConverter;
 import java.util.List;
 
 public class ClassicConstraintsCalculator extends AbstractConstraintsCalculator {
-    protected ClassicConstraintsCalculator(CoordinatesConverter coordinatesConverter) {
+    public ClassicConstraintsCalculator(CoordinatesConverter coordinatesConverter) {
         super(coordinatesConverter);
     }
 
